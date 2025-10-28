@@ -2,5 +2,5 @@
 
 bool SW520D_Tilt_Sensor::isThereTilt()
 {
-  return static_cast<bool>(digitalRead(pinNumber_));
+  return digitalRead(pinNumber_) != 0;
 }
