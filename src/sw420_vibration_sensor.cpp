@@ -2,5 +2,5 @@
 
 bool SW420_Vibration_Sensor::isThereVibration() 
 {
-  return static_cast<bool>(digitalRead(pinNumber_));
+  return digitalRead(pinNumber_) != 0;
 }
