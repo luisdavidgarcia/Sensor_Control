@@ -18,7 +18,7 @@ float HCSR04_Ultrasonic_Sensor::getPulseDuration_s()
   return static_cast<float>((pulseEnd - pulseStart) / one_s_k);
 }
 
-HCSR04_Ultrasonic_Sensor::getDistance_mm()
+float HCSR04_Ultrasonic_Sensor::getDistance_mm()
 {
   digitalWrite(triggerPinNumber_, LOW);
   std::this_thread::sleep_for(two_us_k);
