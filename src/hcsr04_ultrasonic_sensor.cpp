@@ -2,31 +2,32 @@
 
 float HCSR04_Ultrasonic_Sensor::getPulseDuration_s()
 {
-  float pulse_start{};
+  std::chrono::time_point<std::chrono::system_clock> pulse_start;
+  std::chrono::time_point<std::chrono::system_clock> pulse_end;
+
   while (digitalRead(echoPinNumber_) == 0)
   {
-    pulseStart = // get current time
+    pulseStart = std::chrono::system_clock::now();
   }
 
-  float pulse_end{};
   while(digitalRead(echoPinNumber_) == 1)
   {
-    pulseEnd = // get current time
+    pulseEnd = std::chrono::system_clock::now();
   }
   
-  return pulseEnd - pulseStart;
+  return static_cast<float>((pulseEnd - pulseStart) / one_s_k);
 }
 
-float HCSR04_Ultrasonic_Sensor::getDistance_m()
+HCSR04_Ultrasonic_Sensor::getDistance_mm()
 {
   digitalWrite(triggerPinNumber_, LOW);
-  // Delay 2 microseconds
+  std::this_thread::sleep_for(two_us_k);
   digitalWrite(triggerPinNumber_, HIGH);
-  // Delay 10 microseconds
+  std::this_thread::sleep_for(ten_us_k);
   digitalWrite(triggerPinNumber_, LOW);
 
   float duration = getPulseDuration_s();
 
   // Speed of sound in m/s divided in half because of roundtrip-time
-  float distance = (duration * 0.343) / 2;
+  float distance = (duration * speedOfSound_mmPs_k) / 2;
 }
