@@ -16,7 +16,10 @@ FetchContent_MakeAvailable(googletest)
 
 project(Sensor_Control)
 
-add_executable(sensor_control src/main.cpp)
+add_executable(sensor_control 
+  src/main.cpp
+  src/sw420_vibration_sensor.cpp
+)
 target_link_libraries(sensor_control PRIVATE wiringPi)
 include_directories(include src tests)
 
