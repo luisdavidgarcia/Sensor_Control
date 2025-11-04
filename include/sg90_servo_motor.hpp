@@ -3,6 +3,8 @@
 
 #include <wiringPi.h>
 
+constexpr std::chrono::milliseconds two_ms_k{2};
+
 class SG90_Servo_Motor
 {
 public:
