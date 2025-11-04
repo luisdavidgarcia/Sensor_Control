@@ -1,6 +1,6 @@
 #include "sg90_servo_motor.hpp"
 
-static const two_ms_k std::chrono::milliseconds(2);
+static const std::chrono::milliseconds two_ms_k std::chrono::milliseconds(2);
 
 void SG90_Servo_Motor::SetAngle(int degrees)
 {

@@ -6,7 +6,7 @@
 class SW520D_Tilt_Sensor
 {
 public:
-  SW520D_TiltSensor(int pinNumber) : pinNumber_(pinNumber)
+  SW520D_Tilt_Sensor(int pinNumber) : pinNumber_(pinNumber)
   {
     pinMode(pinNumber_, INPUT);
   }

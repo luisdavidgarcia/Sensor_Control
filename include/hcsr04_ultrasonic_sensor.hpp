@@ -6,9 +6,9 @@
 #include <thread>
 
 static const int speedOfSound_mmPs_k = 0.343;
-static const one_s_k std::chrono::seconds{1};
-static const two_us_k std::chrono::microseconds{2};
-static const ten_us_k std::chrono::microseconds{10};
+static const std::chrono::seconds one_s_k std::chrono::seconds{1};
+static const std::chrono::microseconds two_us_k std::chrono::microseconds{2};
+static const std::chrono::microseconds ten_us_k std::chrono::microseconds{10};
 
 class HCSR04_Ultrasonic_Sensor
 {
