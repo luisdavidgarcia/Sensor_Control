@@ -4,7 +4,7 @@
 #include "raindrop_sensor.hpp"
 #include "sg90_servo_motor.hpp"
 #include "sw420_vibration_sensor.hpp"
-#include "sg90_servor_motor.hpp"
+#include "sw520d_tilt_sensor.hpp"
 #include <iostream>
 
 void controller() 

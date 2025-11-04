@@ -17,7 +17,7 @@ FetchContent_MakeAvailable(googletest)
 project(Sensor_Control)
 
 add_executable(sensor_control src/main.cpp)
-target_link_libraries(sensor_control PUBLIC wiringPi)
+target_link_libraries(sensor_control PRIVATE wiringPi)
 include_directories(include src tests)
 
 #enable_testing()
