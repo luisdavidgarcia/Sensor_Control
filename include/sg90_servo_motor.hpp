@@ -8,7 +8,7 @@ class SG90_Servo_Motor
 public:
   SG90_Servo_Motor(int pinNumber) : pinNumber_(pinNumber)
   {
-    pinMode(pinNumber_, PWM_OUTPUT);
+    pinMode(pinNumber_, PWM_MS_OUTPUT);
   }
   void SetAngle(int degrees);
 private:
