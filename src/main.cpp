@@ -7,12 +7,16 @@
 #include "sw520d_tilt_sensor.hpp"
 #include <iostream>
 
-constexpr int tiltSensorPin{4};
-constexpr int vibrationSensorPin{5};
-constexpr int raindropSensorPin{6};
-constexpr int humiditySensorPin{27};
-constexpr int backServoPin{26};
-constexpr int frontServoPin{23};
+constexpr int tiltSensorPin{4};               // 23
+constexpr int vibrationSensorPin{5};          // 24
+constexpr int raindropSensorPin{6};           // 25
+constexpr int humiditySensorPin{27};          // 16
+constexpr int backServoPin{26};               // 12
+constexpr int frontServoPin{23};              // 13
+constexpr int backUltrasonicTriggerPin{0};    // 17
+constexpr int backUltrasonicEchoPin{2};       // 27
+constexpr int frontUltrasonicTriggerPin{21};  // 5
+constexpr int frontUltrasonicEchoPin{22};     // 6
 
 void controller() 
 {
@@ -26,6 +30,12 @@ void controller()
   Raindrop_Sensor raindrop_module(raindropSensorPin);
   SG90_Servo_Motor back_servo{backServoPin};
   SG90_Servo_Motor front_servo{frontServoPin};
+  HCSR04_Ultrasonic_Sensor backUltrasonic(
+    backUltrasonicTriggerPin,
+    backUltrasonicEchoPin);
+  HCSR04_Ultrasonic_Sensor frontUltrasonic(
+    frontUltrasonicTriggerPin,
+    frontUltrasonicEchoPin);
 
   while (!vibration_module.isThereVibration()) {
     std::cout << "no vibration yet\n"; 
