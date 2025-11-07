@@ -11,6 +11,8 @@ constexpr int tiltSensorPin{4};
 constexpr int vibrationSensorPin{5};
 constexpr int raindropSensorPin{6};
 constexpr int humiditySensorPin{27};
+constexpr int backServoPin{26};
+constexpr int frontServoPin{23};
 
 void controller() 
 {
@@ -22,6 +24,8 @@ void controller()
   SW420_Vibration_Sensor vibration_module(vibrationSensorPin);
   SW520D_Tilt_Sensor tilt_module(tiltSensorPin);
   Raindrop_Sensor raindrop_module(raindropSensorPin);
+  SG90_Servo_Motor back_servo{backServoPin};
+  SG90_Servo_Motor front_servo{frontServoPin};
 
   while (!vibration_module.isThereVibration()) {
     std::cout << "no vibration yet\n"; 
