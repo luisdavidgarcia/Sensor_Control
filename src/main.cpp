@@ -19,6 +19,8 @@ void controller()
   while (!vibration_module.isThereVibration()) {
     std::cout << "no vibration yet\n"; 
   }
+
+  std::cout << "Vibration detected\n";
 }
 
 int main()
