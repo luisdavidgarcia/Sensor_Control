@@ -1,4 +1,4 @@
-#ifdef SW420_VIBRATION_SENSOR_HPP
+#ifndef SW420_VIBRATION_SENSOR_HPP
 #define SW420_VIBRATION_SENSOR_HPP
 
 #include <wiringPi.h>
