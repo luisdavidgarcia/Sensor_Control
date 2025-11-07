@@ -7,6 +7,11 @@
 #include "sw520d_tilt_sensor.hpp"
 #include <iostream>
 
+constexpr int tiltSensorPin{4};
+constexpr int vibrationSensorPin{5};
+constexpr int raindropSensorPin{6};
+constexpr int humiditySensorPin{27};
+
 void controller() 
 {
   wiringPiSetupGpio();
@@ -14,7 +19,9 @@ void controller()
   pwmSetClock(384);
   pwmSetRange(1000);
 
-  SW420_Vibration_Sensor vibration_module(5);
+  SW420_Vibration_Sensor vibration_module(vibrationSensorPin);
+  SW520D_Tilt_Sensor tilt_module(tiltSensorPin);
+  Raindrop_Sensor raindrop_module(raindropSensorPin);
 
   while (!vibration_module.isThereVibration()) {
     std::cout << "no vibration yet\n"; 
