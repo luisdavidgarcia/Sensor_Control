@@ -9,6 +9,7 @@ public:
   SW520D_Tilt_Sensor(int pinNumber) : pinNumber_(pinNumber)
   {
     pinMode(pinNumber_, INPUT);
+    pullUpDnControl(pinNumber_, PUD_UP);
   }
   bool isThereTilt();
 private:
