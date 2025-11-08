@@ -4,6 +4,7 @@
 #include <wiringPi.h>
 #include <chrono>
 #include <thread>
+#include <iostream>
 
 constexpr int speedOfSound_mmPs_k = 0.343;
 constexpr std::chrono::seconds one_s_k{1};
