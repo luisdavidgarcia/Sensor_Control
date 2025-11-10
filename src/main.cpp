@@ -9,16 +9,16 @@
 #include <iostream>
 #include <csignal>
 
-constexpr int tiltSensorPin{23};               // 23
-constexpr int vibrationSensorPin{24};          // 24
-constexpr int raindropSensorPin{25};           // 25
-constexpr int humiditySensorPin{16};          // 16
-constexpr int backServoPin{16};               // 12
-constexpr int frontServoPin{13};              // 13
-constexpr int backUltrasonicTriggerPin{17};    // 17
-constexpr int backUltrasonicEchoPin{27};       // 27
-constexpr int frontUltrasonicTriggerPin{5};  // 5
-constexpr int frontUltrasonicEchoPin{6};     // 6
+constexpr int tiltSensorPin{23};               
+constexpr int vibrationSensorPin{24};          
+constexpr int raindropSensorPin{25};          
+constexpr int humiditySensorPin{16};          
+constexpr int backServoPin{16};               
+constexpr int frontServoPin{13};              
+constexpr int backUltrasonicTriggerPin{27};    
+constexpr int backUltrasonicEchoPin{17};       
+constexpr int frontUltrasonicTriggerPin{5};  
+constexpr int frontUltrasonicEchoPin{6};     
 
 void handleInterruptExit(int signal) {
   std:: cout << "Closing Program. Goodbye!\n";
@@ -70,17 +70,19 @@ void controller()
     }
     std::this_thread::sleep_for(std::chrono::milliseconds{500});
 
-    if (backUltrasonic.getDistance_mm() < 500) {
-      std::cout << "No object behind us\n";
+    float backDistance = backUltrasonic.getDistance_cm();;
+    if (backDistance  > 30) {
+      std::cout << "No object behind us: " << backDistance << "cm\n";
     } else {
-      std::cout << "Object behind is too close\n";
+      std::cout << "Object behind is too close: " << backDistance << "cm\n";
     }
     std::this_thread::sleep_for(std::chrono::milliseconds{500});
 
-    if (frontUltrasonic.getDistance_mm() < 500) {
-      std::cout << "No object in front of us\n";
+    float frontDistance = frontUltrasonic.getDistance_cm();;
+    if (frontDistance > 30) {
+      std::cout << "No object in front of us: " << frontDistance << "cm\n";
     } else {
-      std::cout << "Object in front is too close\n";
+      std::cout << "Object in front is too close: " << frontDistance << "cm\n";
     }
     std::this_thread::sleep_for(std::chrono::milliseconds{500});
   }
