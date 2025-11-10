@@ -31,8 +31,9 @@ void controller()
     return;
 
   pwmSetMode(PWM_MODE_MS);
-  pwmSetClock(384);
-  pwmSetRange(1000);
+  // Clock is 19.2MHz so we drop down to 50Hz
+  pwmSetClock(192);
+  pwmSetRange(2000);
 
   SW420_Vibration_Sensor vibrationModule(vibrationSensorPin);
   SW520D_Tilt_Sensor tiltModule(tiltSensorPin);
