@@ -6,7 +6,7 @@
 #include <thread>
 #include <iostream>
 
-constexpr int speedOfSound_mmPs_k = 0.343;
+constexpr float speedOfSound_cmPs_k = 34300.0;
 constexpr std::chrono::seconds one_s_k{1};
 constexpr std::chrono::microseconds two_us_k{2};
 constexpr std::chrono::microseconds ten_us_k{10};
@@ -20,7 +20,7 @@ public:
     pinMode(triggerPinNumber_, OUTPUT);
     pinMode(echoPinNumber_, INPUT);
   }
-  float getDistance_mm();
+  float getDistance_cm();
 private:
   int triggerPinNumber_;
   int echoPinNumber_;
