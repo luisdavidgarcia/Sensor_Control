@@ -5,7 +5,9 @@
 #include <chrono>
 #include <thread>
 
-constexpr std::chrono::milliseconds two_ms_k{2};
+constexpr std::chrono::seconds one_s_k{1};
+constexpr int maxAngle{180};
+constexpr int minPWMValue{100};
 
 class SG90_Servo_Motor
 {
