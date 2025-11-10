@@ -3,7 +3,5 @@
 
 bool SW420_Vibration_Sensor::isThereVibration() 
 {
-  // 0 indicates that there is a vibration
-  std::cout << digitalRead(pinNumber_) << "\n";
-  return digitalRead(pinNumber_) == 0;
+  return digitalRead(pinNumber_) == LOW;
 }
