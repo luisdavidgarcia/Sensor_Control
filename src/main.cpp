@@ -5,7 +5,9 @@
 #include "sg90_servo_motor.hpp"
 #include "sw420_vibration_sensor.hpp"
 #include "sw520d_tilt_sensor.hpp"
+
 #include <iostream>
+#include <csignal>
 
 constexpr int tiltSensorPin{23};               // 23
 constexpr int vibrationSensorPin{24};          // 24
@@ -18,6 +20,11 @@ constexpr int backUltrasonicEchoPin{27};       // 27
 constexpr int frontUltrasonicTriggerPin{5};  // 5
 constexpr int frontUltrasonicEchoPin{6};     // 6
 
+void handInterruptExit(int signal) {
+  std:: cout << "Closing Program. Goodbye!\n";
+  exit(signal);
+}
+
 void controller() 
 {
   if (wiringPiSetupPinType(WPI_PIN_BCM) == -1)
@@ -27,11 +34,13 @@ void controller()
   pwmSetClock(384);
   pwmSetRange(1000);
 
-  SW420_Vibration_Sensor vibration_module(vibrationSensorPin);
-  SW520D_Tilt_Sensor tilt_module(tiltSensorPin);
-  Raindrop_Sensor raindrop_module(raindropSensorPin);
-  SG90_Servo_Motor back_servo{backServoPin};
-  SG90_Servo_Motor front_servo{frontServoPin};
+  SW420_Vibration_Sensor vibrationModule(vibrationSensorPin);
+  SW520D_Tilt_Sensor tiltModule(tiltSensorPin);
+  Raindrop_Sensor raindropModule(raindropSensorPin);
+
+  SG90_Servo_Motor backServo{backServoPin};
+  SG90_Servo_Motor frontServo{frontServoPin};
+
   HCSR04_Ultrasonic_Sensor backUltrasonic(
     backUltrasonicTriggerPin,
     backUltrasonicEchoPin);
@@ -39,25 +48,47 @@ void controller()
     frontUltrasonicTriggerPin,
     frontUltrasonicEchoPin);
 
-  //while (!vibration_module.isThereVibration()) {
-  //  std::cout << "no vibration yet\n"; 
-  //}
-
   while (1) { 
-    if (!tilt_module.isThereTilt()) {
-      std::cout << "no tilt yet\n"; 
+    if (!tiltModule.isThereTilt()) {
+      std::cout << "No tilt yet\n"; 
     } else {
-      std::cout << "tilt\n";
+      std::cout << "Tilt\n";
+    }
+    std::this_thread::sleep_for(std::chrono::milliseconds{500});
+
+    if (!vibrationModule.isThereVibration()) {
+      std::cout << "No vibration yet\n";
+    } else {
+      std::cout << "Vibration\n";
+    }
+    std::this_thread::sleep_for(std::chrono::milliseconds{500});
+
+    if (raindropModule.isThereWater()) {
+      std::cout << "No water yet\n";
+    else {
+      std::cout << "Water!\n";
+    }
+    std::this_thread::sleep_for(std::chrono::milliseconds{500});
+
+    if (backUltrasonic.getDistance_mm() < 500) {
+      std::cout << "No object behind us\n";
+    } else {
+      std::cout << "Object behind is too close\n";
+    }
+    std::this_thread::sleep_for(std::chrono::milliseconds{500});
+
+    if (frontUltrasonic.getDistance_mm() < 500) {
+      std::cout << "No object in front of us\n";
+    } else {
+      std::cout << "Object in front is too close\n";
     }
     std::this_thread::sleep_for(std::chrono::milliseconds{500});
   }
-  //std::cout << "getting distance\n";
-  //std::cout << backUltrasonic.getDistance_mm() << "\n";
-
 }
 
 int main()
 {
+  std::signal(SIGINT, handleInterruptExit);
   controller(); 
   return 0;
 }

@@ -2,5 +2,5 @@
 
 bool Raindrop_Sensor::isThereWater() 
 {
-  return digitalRead(pinNumber_) != 0;
+  return digitalRead(pinNumber_) == LOW;
 }
