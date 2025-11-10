@@ -20,7 +20,7 @@ constexpr int backUltrasonicEchoPin{27};       // 27
 constexpr int frontUltrasonicTriggerPin{5};  // 5
 constexpr int frontUltrasonicEchoPin{6};     // 6
 
-void handInterruptExit(int signal) {
+void handleInterruptExit(int signal) {
   std:: cout << "Closing Program. Goodbye!\n";
   exit(signal);
 }
@@ -65,7 +65,7 @@ void controller()
 
     if (raindropModule.isThereWater()) {
       std::cout << "No water yet\n";
-    else {
+    } else {
       std::cout << "Water!\n";
     }
     std::this_thread::sleep_for(std::chrono::milliseconds{500});
