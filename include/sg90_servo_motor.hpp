@@ -2,6 +2,8 @@
 #define SG90_SERVO_MOTOR_HPP
 
 #include <wiringPi.h>
+#include <chrono>
+#include <thread>
 
 constexpr std::chrono::milliseconds two_ms_k{2};
 
