@@ -21,6 +21,8 @@ add_executable(sensor_control
   src/sw420_vibration_sensor.cpp
   src/hcsr04_ultrasonic_sensor.cpp
   src/sw520d_tilt_sensor.cpp
+  src/raindrop_sensor.cpp
+  src/sg90_servo_motor.cpp
 )
 target_link_libraries(sensor_control PRIVATE wiringPi)
 include_directories(include src tests)
