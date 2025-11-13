@@ -10,7 +10,7 @@ void DHT11_Temperature_Humidity_Sensor::readTemperatureAndHumidity()
   uint8_t humi;
   uint8_t humd;
   uint8_t tempi;
-  uint8_t humd;
+  uint8_t tempd;
 
   std::this_thread::sleep_for(two_seconds_k);
   sendStartSignal();
@@ -18,7 +18,7 @@ void DHT11_Temperature_Humidity_Sensor::readTemperatureAndHumidity()
   using clock = std::chrono::steady_clock;
   auto startTime = clock::now();
 
-  for (int8_t i = -3, i < 80; ++i) {
+  for (int8_t i = -3; i < 80; ++i) {
     auto live = clock::now();
     startTime = clock::now();
 
@@ -58,7 +58,7 @@ void DHT11_Temperature_Humidity_Sensor::readTemperatureAndHumidity()
   std::cout << "Humidity: " << humi << "." << humd << "\n";
 
   tempi = rawTemperature >> 8;
-  rawTemperater = rawTemperature << 8;
+  rawTemperature = rawTemperature << 8;
   tempd = rawTemperature >> 8;
   std::cout << "Temperature: " << tempi << "." << tempd << "\n";
 
@@ -70,7 +70,7 @@ void DHT11_Temperature_Humidity_Sensor::readTemperatureAndHumidity()
 
 }
 
-void DHT11_Tempearature_Humiditiy_Sensor::sendStartSignal()
+void DHT11_Temperature_Humiditiy_Sensor::sendStartSignal()
 {
   pinMode(pinNumber_, OUTPUT);
   digitalWrite(pinNumber_, LOW);
