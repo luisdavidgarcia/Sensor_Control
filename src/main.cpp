@@ -5,6 +5,7 @@
 #include "sg90_servo_motor.hpp"
 #include "sw420_vibration_sensor.hpp"
 #include "sw520d_tilt_sensor.hpp"
+#include "dht11_temperature_humidity_sensor.hpp"
 
 #include <iostream>
 #include <csignal>
@@ -12,7 +13,7 @@
 constexpr int tiltSensorPin{23};               
 constexpr int vibrationSensorPin{24};          
 constexpr int raindropSensorPin{25};          
-constexpr int humiditySensorPin{16};          
+constexpr int temperatureHumiditySensorPin{16};          
 constexpr int backServoPin{16};               
 constexpr int frontServoPin{13};              
 constexpr int backUltrasonicTriggerPin{27};    
@@ -35,6 +36,15 @@ void controller()
   pwmSetClock(192);
   pwmSetRange(2000);
 
+  DHT11_Temperature_Humidity_Sensor tempHumidityModule(
+      temperatureHumiditySensorPin);
+
+  while (1) {
+    tempHumidityModule.readTemperatureAndHumidity();
+    std::this_thread::sleep_for(std::chrono::milliseconds{500});
+  }
+
+  /*
   SW420_Vibration_Sensor vibrationModule(vibrationSensorPin);
   SW520D_Tilt_Sensor tiltModule(tiltSensorPin);
   Raindrop_Sensor raindropModule(raindropSensorPin);
@@ -87,6 +97,7 @@ void controller()
     }
     std::this_thread::sleep_for(std::chrono::milliseconds{500});
   }
+  */
 }
 
 int main()
