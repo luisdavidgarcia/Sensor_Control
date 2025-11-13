@@ -6,11 +6,11 @@ float HCSR04_Ultrasonic_Sensor::getPulseDuration_s()
 
   while (digitalRead(echoPinNumber_) == 0)
   {}
-  auto pulseStart = std::chrono::system_clock::now();
+  auto pulseStart = clock::now();
 
   while(digitalRead(echoPinNumber_) == 1)
   {}
-  auto pulseEnd = std::chrono::system_clock::now();
+  auto pulseEnd = clock::now();
 
   const std::chrono::duration<float> pulseDuration = pulseEnd - pulseStart;
 
