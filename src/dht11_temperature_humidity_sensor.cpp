@@ -70,7 +70,7 @@ void DHT11_Temperature_Humidity_Sensor::readTemperatureAndHumidity()
 
 }
 
-void DHT11_Temperature_Humiditiy_Sensor::sendStartSignal()
+void DHT11_Temperature_Humidity_Sensor::sendStartSignal()
 {
   pinMode(pinNumber_, OUTPUT);
   digitalWrite(pinNumber_, LOW);
