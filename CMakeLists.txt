@@ -23,6 +23,7 @@ add_executable(sensor_control
   src/sw520d_tilt_sensor.cpp
   src/raindrop_sensor.cpp
   src/sg90_servo_motor.cpp
+  src/dht11_temperature_humidity_sensor.cpp
 )
 target_link_libraries(sensor_control PRIVATE wiringPi)
 include_directories(include src tests)
